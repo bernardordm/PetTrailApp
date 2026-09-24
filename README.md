@@ -5,7 +5,7 @@
 <h1 align="center">PetTrail</h1>
 
 <p align="center">
-  Conectando tutores e passeadores com rastreamento em tempo real
+  Connecting pet owners and dog walkers with real-time tracking
 </p>
 
 <p align="center">
@@ -16,190 +16,192 @@
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
 </p>
 
----
-
-## Sumário
-
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Objetivos](#objetivos)
-- [Funcionalidades](#funcionalidades)
-- [Arquitetura](#arquitetura)
-- [Tecnologias](#tecnologias)
-- [Estrutura do Repositório](#estrutura-do-repositório)
-- [Como Executar](#como-executar)
-- [Requisitos](#requisitos)
-- [Equipe](#equipe)
-- [Orientadores](#orientadores)
+> **Note:** This is the public version of a group project developed during our undergraduate studies at PUC Minas, as part of the *Interdisciplinary Work: Distributed Applications* course.
 
 ---
 
-## Sobre o Projeto
+## Table of Contents
 
-O **PetTrail** é uma plataforma completa (mobile + web) que conecta **tutores de pets** a **passeadores autônomos** em ambiente urbano. O sistema foi desenvolvido para profissionalizar e digitalizar o mercado de passeio com pets no Brasil — o terceiro maior mercado pet do mundo, movimentando **R$ 75,4 bilhões em 2024** e ainda amplamente operado de forma informal.
-
-A plataforma oferece rastreamento GPS em tempo real durante os passeios, confirmação presencial por QR Code, geração automática de relatórios com o trajeto percorrido e um sistema de avaliações entre tutores e passeadores.
-
----
-
-## Objetivos
-
-### Objetivo Geral
-Desenvolver uma solução digital que facilite a conexão entre tutores e passeadores de pets, garantindo segurança, transparência e monitoramento em tempo real durante os passeios.
-
-### Objetivos Específicos
-
-- Permitir que tutores localizem passeadores disponíveis próximos à sua localização em um mapa interativo
-- Oferecer rastreamento GPS em segundo plano nos dispositivos dos passeadores, transmitindo a localização em tempo real aos tutores
-- Implementar confirmação presencial de início de passeio via QR Code para garantir segurança ao tutor
-- Gerar relatórios automáticos ao final de cada passeio com métricas de distância, duração e imagem do trajeto
-- Disponibilizar painéis web para tutores e passeadores acompanharem histórico, métricas e desempenho
-- Criar um sistema de avaliações que permita construção de reputação pelos passeadores
+- [About the Project](#about-the-project)
+- [Goals](#goals)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
+- [How to Run](#how-to-run)
+- [Requirements](#requirements)
+- [Team](#team)
+- [Advisors](#advisors)
 
 ---
 
-## Funcionalidades
+## About the Project
 
-### Para Tutores (Donos de Pets)
+**PetTrail** is a full-stack platform (mobile + web) that connects **pet owners** with **independent dog walkers** in urban environments. The system was built to professionalize and digitize the pet walking market in Brazil — the third largest pet market in the world, generating **R$ 75.4 billion in 2024**, yet still largely operating informally.
 
-| Funcionalidade | Descrição |
+The platform provides real-time GPS tracking during walks, on-site confirmation via QR Code, automatic post-walk report generation with the route taken, and a mutual rating system between owners and walkers.
+
+---
+
+## Goals
+
+### General Goal
+Develop a digital solution that facilitates the connection between pet owners and dog walkers, ensuring safety, transparency, and real-time monitoring throughout each walk.
+
+### Specific Goals
+
+- Allow owners to find available walkers near their location on an interactive map
+- Provide background GPS tracking on walkers' devices, transmitting their location in real time to owners
+- Implement on-site walk confirmation via a QR Code to ensure owner safety
+- Automatically generate post-walk reports with distance, duration, and a route image
+- Offer web dashboards for both owners and walkers to view history, metrics, and performance
+- Build a rating system that allows walkers to establish reputation over time
+
+---
+
+## Features
+
+### For Pet Owners
+
+| Feature | Description |
 |---|---|
-| Cadastro e perfil | Criação de conta com dados pessoais e perfis dos pets |
-| Mapa de passeadores | Visualização de passeadores disponíveis em raio próximo |
-| Solicitação de passeio | Envio de solicitação com código de confirmação de 6 dígitos |
-| Rastreamento em tempo real | Acompanhamento do percurso do pet desenhado ao vivo no mapa |
-| Relatório pós-passeio | Recebimento de relatório com trajeto, distância e duração |
-| Avaliação | Avaliação do passeador de 1 a 5 estrelas ao final do passeio |
-| Histórico | Acesso ao histórico completo de passeios via painel web |
+| Account & profile | Registration with personal details and pet profiles |
+| Walker map | View available walkers within a nearby radius |
+| Walk request | Send a request with a 6-digit confirmation code |
+| Real-time tracking | Follow the pet's route being drawn live on the map |
+| Post-walk report | Receive a report with route, distance, and duration |
+| Rating | Rate the walker from 1 to 5 stars after the walk |
+| History | Access full walk history via the web dashboard |
 
-### Para Passeadores
+### For Dog Walkers
 
-| Funcionalidade | Descrição |
+| Feature | Description |
 |---|---|
-| Cadastro e perfil | Criação de conta com documentação, precificação e foto |
-| Disponibilidade | Ativação/desativação de disponibilidade (visível no mapa) |
-| Recebimento de solicitações | Notificações de novas solicitações de passeio |
-| Confirmação de chegada | Validação presencial via código fornecido pelo tutor |
-| GPS em segundo plano | Transmissão da localização a cada 5 segundos durante o passeio |
-| Encerramento de passeio | Finalização do passeio com geração automática de relatório |
-| Painel de métricas | Dashboard web com histórico, avaliações e métricas mensais |
+| Account & profile | Registration with documentation, pricing, and photo |
+| Availability toggle | Enable/disable availability (visible on the map) |
+| Walk requests | Receive notifications for new walk requests |
+| Arrival confirmation | On-site validation via code provided by the owner |
+| Background GPS | Location transmitted every 5 seconds during the walk |
+| Walk completion | End the walk and trigger automatic report generation |
+| Metrics dashboard | Web dashboard with history, ratings, and monthly metrics |
 
 ---
 
-## Arquitetura
+## Architecture
 
-O PetTrail utiliza uma arquitetura de microserviços com comunicação assíncrona via mensageria:
+PetTrail uses a microservices architecture with asynchronous communication via message queuing:
 
 ```
 ┌─────────────────┐     REST/WS      ┌─────────────────────────────┐
-│  App Mobile     │ ◄──────────────► │         Backend API         │
+│  Mobile App     │ ◄──────────────► │         Backend API         │
 │  (Flutter)      │                  │         (NestJS)            │
 └─────────────────┘                  └──────────┬──────────────────┘
                                                 │
 ┌─────────────────┐     REST         │          │ RabbitMQ
-│  Dashboard Web  │ ◄──────────────► │          ▼
+│  Web Dashboard  │ ◄──────────────► │          ▼
 │  (Next.js)      │                  ┌──────────────────────┐
-└─────────────────┘                  │  Worker / Relatorios │
+└─────────────────┘                  │  Worker / Reports    │
                                      │  (Node.js)           │
                                      └──────────────────────┘
          ┌───────────────────────────────────────────┐
-         │           Infraestrutura de Dados          │
+         │              Data Infrastructure           │
          │  PostgreSQL (AWS RDS) │ Firebase Realtime  │
          │  Firebase Storage     │ Google Maps APIs   │
          └───────────────────────────────────────────┘
 ```
 
-### Fluxo de um Passeio
+### Walk Flow
 
-1. Tutor visualiza passeadores disponíveis no mapa e envia solicitação
-2. Passeador recebe notificação, aceita e se desloca até o local
-3. Ao chegar, passeador insere o **código de 6 dígitos** fornecido pelo tutor — confirmação presencial
-4. Passeio inicia: GPS captura coordenadas a cada 5 segundos via **WebSocket**
-5. Tutor acompanha o percurso sendo desenhado em tempo real
-6. Ao finalizar, o backend publica uma mensagem no **RabbitMQ**
-7. O **Worker** processa o relatório de forma assíncrona (trajeto, distância, duração)
-8. Tutor e passeador avaliam a experiência mutuamente
+1. Owner views available walkers on the map and sends a request
+2. Walker receives a notification, accepts, and heads to the location
+3. On arrival, the walker enters the **6-digit code** provided by the owner — on-site confirmation
+4. Walk begins: GPS captures coordinates every 5 seconds via **WebSocket**
+5. Owner watches the route being drawn in real time
+6. On completion, the backend publishes a message to **RabbitMQ**
+7. The **Worker** processes the report asynchronously (route, distance, duration)
+8. Owner and walker rate each other
 
-### Comunicação
+### Communication Channels
 
-| Canal | Protocolo | Uso |
+| Channel | Protocol | Purpose |
 |---|---|---|
-| App ↔ Backend | REST API | CRUD, autenticação, histórico |
-| App ↔ Backend | WebSocket | Transmissão de coordenadas GPS em tempo real |
-| Backend ↔ Worker | RabbitMQ | Geração assíncrona de relatórios |
-| App ↔ Firebase | Realtime Database | Estado da sessão de passeio |
+| App ↔ Backend | REST API | CRUD, authentication, history |
+| App ↔ Backend | WebSocket | Real-time GPS coordinate streaming |
+| Backend ↔ Worker | RabbitMQ | Asynchronous report generation |
+| App ↔ Firebase | Realtime Database | Walk session state |
 
 ---
 
-## Tecnologias
+## Tech Stack
 
 ### Mobile (Flutter)
 
-| Tecnologia | Versão | Uso |
+| Technology | Version | Purpose |
 |---|---|---|
-| Flutter / Dart | 3.x | Framework principal mobile (iOS & Android) |
-| Google Maps Flutter | 2.10.0 | Mapas e rastreamento no app |
-| Geolocator | 13.0.4 | Captura de GPS em segundo plano |
-| QR Flutter | 4.1.0 | Geração de QR Code |
-| Mobile Scanner | 7.1.2 | Leitura de QR Code |
-| Firebase Core + Database | latest | Integração Firebase |
-| HTTP | 1.6.0 | Comunicação com a API |
-| Shared Preferences | 2.5.5 | Armazenamento local |
-| Image Picker | 1.0.4 | Seleção de fotos do perfil |
+| Flutter / Dart | 3.x | Main mobile framework (iOS & Android) |
+| Google Maps Flutter | 2.10.0 | Maps and tracking in the app |
+| Geolocator | 13.0.4 | Background GPS capture |
+| QR Flutter | 4.1.0 | QR Code generation |
+| Mobile Scanner | 7.1.2 | QR Code scanning |
+| Firebase Core + Database | latest | Firebase integration |
+| HTTP | 1.6.0 | API communication |
+| Shared Preferences | 2.5.5 | Local storage |
+| Image Picker | 1.0.4 | Profile photo selection |
 
-### Frontend Web (Next.js)
+### Web Frontend (Next.js)
 
-| Tecnologia | Versão | Uso |
+| Technology | Version | Purpose |
 |---|---|---|
-| Next.js | 16.2.0 | Framework React SSR/SSG |
-| React | 19.2.4 | Biblioteca de UI |
-| Tailwind CSS | 4.2.0 | Estilização |
-| @react-google-maps/api | 2.20.8 | Mapas no painel web |
-| Firebase | 12.12.1 | Autenticação e dados em tempo real |
-| Recharts | 2.15.0 | Gráficos e analytics |
-| React Hook Form | 7.54.1 | Gerenciamento de formulários |
-| Zod | 3.24.1 | Validação de schemas |
-| Radix UI | latest | Componentes acessíveis (modais, acordeões etc.) |
-| React Easy Crop | 5.5.7 | Recorte de imagens de perfil |
+| Next.js | 16.2.0 | React SSR/SSG framework |
+| React | 19.2.4 | UI library |
+| Tailwind CSS | 4.2.0 | Styling |
+| @react-google-maps/api | 2.20.8 | Maps in the web dashboard |
+| Firebase | 12.12.1 | Authentication and real-time data |
+| Recharts | 2.15.0 | Charts and analytics |
+| React Hook Form | 7.54.1 | Form management |
+| Zod | 3.24.1 | Schema validation |
+| Radix UI | latest | Accessible components (modals, accordions, etc.) |
+| React Easy Crop | 5.5.7 | Profile image cropping |
 
 ### Backend API (NestJS)
 
-| Tecnologia | Versão | Uso |
+| Technology | Version | Purpose |
 |---|---|---|
-| NestJS | 11.0.1 | Framework Node.js |
-| TypeORM | 0.3.x | ORM e migrações |
-| PostgreSQL (pg) | 8.20.0 | Banco de dados relacional |
-| JWT + Passport | 11.0.x | Autenticação e autorização |
-| Firebase Admin | 13.7.0 | Integração Firebase server-side |
-| bcrypt | 6.0.0 | Hash de senhas |
-| class-validator | latest | Validação de DTOs |
+| NestJS | 11.0.1 | Node.js framework |
+| TypeORM | 0.3.x | ORM and migrations |
+| PostgreSQL (pg) | 8.20.0 | Relational database |
+| JWT + Passport | 11.0.x | Authentication and authorization |
+| Firebase Admin | 13.7.0 | Server-side Firebase integration |
+| bcrypt | 6.0.0 | Password hashing |
+| class-validator | latest | DTO validation |
 
-### Worker / Microserviço
+### Worker / Microservice
 
-| Tecnologia | Uso |
+| Technology | Purpose |
 |---|---|
-| NestJS (Node.js) | Framework do microserviço |
-| RabbitMQ (Amazon MQ) | Consumo de filas de relatórios |
+| NestJS (Node.js) | Microservice framework |
+| RabbitMQ (Amazon MQ) | Report queue consumption |
 
-### Infraestrutura & Cloud
+### Infrastructure & Cloud
 
-| Serviço | Uso |
+| Service | Purpose |
 |---|---|
-| AWS RDS (PostgreSQL) | Banco de dados relacional em nuvem |
-| AWS Amazon MQ (RabbitMQ) | Mensageria assíncrona |
-| Firebase Realtime Database | Dados de sessão em tempo real |
-| Firebase Storage | Armazenamento de imagens de perfil |
-| Render | Hospedagem do backend e worker |
-| Vercel | Hospedagem do frontend web |
+| AWS RDS (PostgreSQL) | Relational database in the cloud |
+| AWS Amazon MQ (RabbitMQ) | Asynchronous messaging |
+| Firebase Realtime Database | Real-time session data |
+| Firebase Storage | Profile image storage |
+| Render | Backend and worker hosting |
+| Vercel | Web frontend hosting |
 | Google Maps Platform | Maps SDK, Static Maps, Directions, Geocoding |
 
 ---
 
-## Estrutura do Repositório
+## Repository Structure
 
 ```
 pet-trail/
 ├── code/
-│   ├── backend/          # API principal (NestJS)
+│   ├── backend/          # Main API (NestJS)
 │   │   └── src/
 │   │       ├── app/
 │   │       ├── domains/
@@ -210,58 +212,58 @@ pet-trail/
 │   │       │   ├── pets/
 │   │       │   └── tours/
 │   │       └── database/
-│   ├── frontend/         # Painel web (Next.js)
+│   ├── frontend/         # Web dashboard (Next.js)
 │   │   └── src/
 │   │       ├── app/
 │   │       ├── components/
 │   │       └── shared/
-│   ├── mobile/           # App mobile (Flutter)
+│   ├── mobile/           # Mobile app (Flutter)
 │   │   └── lib/
 │   │       ├── screens/
 │   │       ├── widgets/
 │   │       ├── domain/
 │   │       ├── data/
 │   │       └── theme/
-│   └── worker/           # Microserviço de relatórios (Node.js)
-├── docs/                 # Documentação técnica e de produto
-├── assets/               # Artefatos de gerência e atas
-└── divulge/              # Materiais de apresentação e vídeos
+│   └── worker/           # Reports microservice (Node.js)
+├── docs/                 # Technical and product documentation
+├── assets/               # Management artifacts and meeting notes
+└── divulge/              # Presentation materials and videos
 ```
 
 ---
 
-## Como Executar
+## How to Run
 
-### Pré-requisitos
+### Prerequisites
 
 - [Node.js](https://nodejs.org/) >= 20
 - [Flutter SDK](https://flutter.dev/) >= 3.x
-- [PostgreSQL](https://www.postgresql.org/) >= 15 (ou acesso ao AWS RDS)
-- Conta no Firebase com projeto configurado
-- Chave da API do Google Maps
+- [PostgreSQL](https://www.postgresql.org/) >= 15 (or access to AWS RDS)
+- Firebase project configured
+- Google Maps API key
 
 ### Backend
 
 ```bash
 cd code/backend
-cp .env.example .env   # configure as variáveis de ambiente
+cp .env.example .env   # configure environment variables
 npm install
-npm run migration:run  # executa as migrações do banco
+npm run migration:run  # run database migrations
 npm run start:dev
 ```
 
-O servidor sobe em `http://localhost:3001`.
+Server runs at `http://localhost:3001`.
 
-### Frontend Web
+### Web Frontend
 
 ```bash
 cd code/frontend
-cp .env.example .env   # configure NEXT_PUBLIC_API_URL e chaves Firebase/Google Maps
+cp .env.example .env   # configure NEXT_PUBLIC_API_URL and Firebase/Google Maps keys
 npm install
 npm run dev
 ```
 
-Acesse em `http://localhost:3000`.
+Access at `http://localhost:3000`.
 
 ### Mobile
 
@@ -271,7 +273,9 @@ flutter pub get
 flutter run
 ```
 
-> Configure `lib/config/app_config.dart` com a URL da API antes de rodar.
+> Configure `lib/config/app_config.dart` with the API URL before running.
+>
+> The Google Maps API key must be set in `android/local.properties` as `MAPS_API_KEY=<your_key>`.
 
 ### Worker
 
@@ -283,58 +287,58 @@ npm run start:dev
 
 ---
 
-## Requisitos
+## Requirements
 
-### Funcionais
+### Functional
 
-| ID | Requisito |
+| ID | Requirement |
 |---|---|
-| RF001 | Cadastro e autenticação de tutores e passeadores |
-| RF002 | Gerenciamento de perfil de pets pelo tutor |
-| RF003 | Passeador pode ativar/desativar disponibilidade |
-| RF004 | Tutor visualiza passeadores disponíveis em mapa próximo |
-| RF005 | Tutor solicita passeio e recebe código de confirmação |
-| RF006 | Passeador recebe notificação de solicitação e aceita/recusa |
-| RF007 | Confirmação presencial de início via código de 6 dígitos |
-| RF008 | Rastreamento GPS em segundo plano pelo passeador |
-| RF009 | Tutor acompanha o percurso em tempo real no mapa |
-| RF010 | Encerramento do passeio pelo passeador |
-| RF011 | Geração automática de relatório pós-passeio (trajeto, distância, duração) |
-| RF012 | Sistema de avaliação mútua tutor ↔ passeador (1–5 estrelas) |
-| RF013 | Painel web com histórico de passeios para tutores |
-| RF014 | Painel web com métricas e histórico para passeadores |
-| RF015 | Gerenciamento de status de passeio (pendente, em andamento, concluído) |
+| FR001 | Registration and authentication for owners and walkers |
+| FR002 | Pet profile management by the owner |
+| FR003 | Walker can toggle availability on/off |
+| FR004 | Owner views available walkers on a nearby map |
+| FR005 | Owner requests a walk and receives a confirmation code |
+| FR006 | Walker receives walk request notification and accepts/declines |
+| FR007 | On-site walk start confirmation via 6-digit code |
+| FR008 | Background GPS tracking by the walker |
+| FR009 | Owner follows the route in real time on the map |
+| FR010 | Walker ends the walk |
+| FR011 | Automatic post-walk report generation (route, distance, duration) |
+| FR012 | Mutual rating system owner ↔ walker (1–5 stars) |
+| FR013 | Web dashboard with walk history for owners |
+| FR014 | Web dashboard with metrics and history for walkers |
+| FR015 | Walk status management (pending, in progress, completed) |
 
-### Não Funcionais
+### Non-Functional
 
-| ID | Requisito |
+| ID | Requirement |
 |---|---|
-| RNF001 | Latência máxima de 30 segundos para atualizações de GPS |
-| RNF002 | Alta disponibilidade do backend |
-| RNF003 | Escalabilidade horizontal via RabbitMQ |
-| RNF004 | Autenticação JWT com controle de acesso por papel (tutor/passeador) |
-| RNF005 | Credenciais exclusivamente via variáveis de ambiente |
-| RNF006 | Banco de dados em AWS RDS com backups e isolamento em VPC |
-| RNF007 | Geração de relatórios assíncrona sem bloqueio ao finalizar o passeio |
-| RNF008 | GPS em segundo plano funcional em iOS e Android |
-| RNF009 | Interface web responsiva |
-| RNF010 | Uso dentro do nível gratuito do Google Maps e AWS |
+| NFR001 | Maximum 30-second latency for GPS updates |
+| NFR002 | High availability of the backend |
+| NFR003 | Horizontal scalability via RabbitMQ |
+| NFR004 | JWT authentication with role-based access control (owner/walker) |
+| NFR005 | Credentials exclusively via environment variables |
+| NFR006 | Database on AWS RDS with backups and VPC isolation |
+| NFR007 | Asynchronous report generation without blocking walk completion |
+| NFR008 | Background GPS functional on both iOS and Android |
+| NFR009 | Responsive web interface |
+| NFR010 | Usage within the free tier of Google Maps and AWS |
 
 ---
 
-## Equipe
+## Team
 
-| Nome | GitHub |
+| Name | GitHub |
 |---|---|
 | Bernardo de Resende Marcelino | https://github.com/bernardordm |
 | Flávio de Souza Júnior | https://github.com/flaviojuniordev |
 | João Marcelo Carvalho Pereira Araújo | https://github.com/joaomarcelocpa |
-| Luidi Cadete Silva |https://github.com/LuidiC |
+| Luidi Cadete Silva | https://github.com/LuidiC |
 | Miguel Figueiredo Diniz | https://github.com/DevMiguelDiniz |
 
 ---
 
-## Orientadores
+## Advisors
 
 - Cleiton Silva Tavares
 - Leonardo Vilela Cardoso
@@ -343,5 +347,5 @@ npm run start:dev
 ---
 
 <p align="center">
-  Desenvolvido na disciplina de <strong>Trabalho Interdisciplinar: Aplicações Distríbuidas</strong>
+  Developed as part of the <strong>Interdisciplinary Work: Distributed Applications</strong> course
 </p>
