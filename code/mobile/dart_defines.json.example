@@ -1,0 +1,5 @@
+{
+  "API_BASE_URL": "http://localhost:3001",
+  "WORKER_BASE_URL": "http://localhost:3002",
+  "CHAT_BASE_URL": "http://localhost:3003"
+}

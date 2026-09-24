@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "144924319342",
+    "firebase_url": "https://pettrail-74301-default-rtdb.firebaseio.com",
+    "project_id": "pettrail-74301",
+    "storage_bucket": "pettrail-74301.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144924319342:android:a487d8fbb6f4aaf5e8d07f",
+        "android_client_info": {
+          "package_name": "com.pettrail.pet_trail"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuaC94qjicJCbUJFacCfqSXlD63y4qFcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,35 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: PetTrail - Aplicativo de solicitações de passeios de pet
+authors:
+  - family-names: de Resende Marcelino
+    given-names: Bernardo
+  - family-names: de Souza Ferreira Júnior
+    given-names: Flávio
+  - family-names: Carvalho Pereira Araújo
+    given-names: João Marcelo
+  - family-names: Cadete Silva
+    given-names: Luidi
+  - family-names: Figueiredo Diniz
+    given-names: Miguel
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Martins Mol
+    given-names: Artur
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Silva Tavares
+    given-names: Cleiton
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Vilela Cardoso
+    given-names: Leonardo
+keywords:
+  - Passeios de pet
+  - Geolocalização
+  - Solicitação de passeios 
+  - Relatórios automatizados
+repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-1-ti5-6904100-pet-trail
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-07-10

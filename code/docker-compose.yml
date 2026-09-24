@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    env_file: ./backend/.env
+
+  chat-service:
+    build: ./chat-service
+    ports:
+      - "3003:3003"
+    env_file: ./chat-service/.env
+
+  worker:
+    build: ./worker
+    ports:
+      - "3002:3002"
+    env_file: ./worker/.env

@@ -1,0 +1,56 @@
+name: pet_trail
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  http: ^1.6.0
+  mask_text_input_formatter: ^2.9.0
+  geolocator: ^13.0.4
+  google_maps_flutter: ^2.10.0
+  firebase_core: ^3.13.0
+  firebase_database: ^11.3.5
+  shared_preferences: ^2.5.5
+  image_picker: ^1.0.4
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^7.1.2
+
+  fl_chart: ^1.0.0
+
+  mime: ^1.0.6
+  http_parser: ^4.1.2
+  flutter_dotenv: ^6.0.1
+  mapbox_maps_flutter: ^2.23.0
+  socket_io_client: ^2.0.3+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/images/logo.png
+  remove_alpha_ios: true
+  adaptive_icon_background: "#111827"
+  adaptive_icon_foreground: assets/images/logo.png
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/map_style.json
+    - assets/map_style_dark.json
+    - .env
